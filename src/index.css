@@ -1,0 +1,311 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* MediCare Pro Design System - Premium Healthcare UI */
+
+@layer base {
+  :root {
+    /* Base Colors - Medical Blue Theme */
+    --background: 0 0% 99%;
+    --foreground: 215 25% 15%;
+
+    /* Card & Surface Colors */
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 15%;
+
+    /* Primary - Medical Blue */
+    --primary: 210 85% 58%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 210 85% 68%;
+    --primary-dark: 210 85% 48%;
+
+    /* Secondary - Healing Green */
+    --secondary: 142 70% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Accent - Trust Purple */
+    --accent: 258 85% 68%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Muted Colors */
+    --muted: 210 15% 96%;
+    --muted-foreground: 215 15% 55%;
+
+    /* Status Colors */
+    --success: 142 70% 45%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 90% 55%;
+    --warning-foreground: 0 0% 100%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Input & Border */
+    --border: 210 15% 88%;
+    --input: 210 15% 94%;
+    --ring: 210 85% 58%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(210 85% 58%), hsl(258 85% 68%));
+    --gradient-secondary: linear-gradient(135deg, hsl(142 70% 45%), hsl(210 85% 58%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 85% 58% / 0.1), hsl(258 85% 68% / 0.1));
+
+    /* Shadows */
+    --shadow-sm: 0 1px 3px hsl(210 25% 15% / 0.1);
+    --shadow-md: 0 4px 12px hsl(210 25% 15% / 0.1);
+    --shadow-lg: 0 8px 32px hsl(210 25% 15% / 0.12);
+    --shadow-glow: 0 0 32px hsl(210 85% 58% / 0.3);
+
+    /* Animation Properties */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    /* Dark Mode - Deep Medical Blue */
+    --background: 215 30% 8%;
+    --foreground: 210 15% 92%;
+
+    --card: 215 25% 12%;
+    --card-foreground: 210 15% 92%;
+
+    --popover: 215 25% 12%;
+    --popover-foreground: 210 15% 92%;
+
+    /* Primary - Bright Medical Blue */
+    --primary: 210 85% 65%;
+    --primary-foreground: 215 30% 8%;
+    --primary-light: 210 85% 75%;
+    --primary-dark: 210 85% 55%;
+
+    /* Secondary - Vibrant Green */
+    --secondary: 142 70% 50%;
+    --secondary-foreground: 215 30% 8%;
+
+    /* Accent - Electric Purple */
+    --accent: 258 85% 72%;
+    --accent-foreground: 215 30% 8%;
+
+    --muted: 215 25% 15%;
+    --muted-foreground: 210 15% 65%;
+
+    --success: 142 70% 50%;
+    --success-foreground: 215 30% 8%;
+    
+    --warning: 38 90% 60%;
+    --warning-foreground: 215 30% 8%;
+    
+    --destructive: 0 84% 65%;
+    --destructive-foreground: 215 30% 8%;
+
+    --border: 215 25% 18%;
+    --input: 215 25% 15%;
+    --ring: 210 85% 65%;
+
+    /* Dark Mode Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(210 85% 65%), hsl(258 85% 72%));
+    --gradient-secondary: linear-gradient(135deg, hsl(142 70% 50%), hsl(210 85% 65%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 85% 65% / 0.1), hsl(258 85% 72% / 0.1));
+
+    /* Dark Mode Shadows */
+    --shadow-sm: 0 1px 3px hsl(0 0% 0% / 0.3);
+    --shadow-md: 0 4px 12px hsl(0 0% 0% / 0.3);
+    --shadow-lg: 0 8px 32px hsl(0 0% 0% / 0.4);
+    --shadow-glow: 0 0 32px hsl(210 85% 65% / 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter antialiased transition-colors duration-300;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Animated Focus Ring with Moving Border */
+  .focus-ring {
+    @apply relative overflow-hidden;
+  }
+
+  .focus-ring::before {
+    content: '';
+    @apply absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300;
+    background: conic-gradient(from 0deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)));
+    animation: rotate-border 3s linear infinite;
+    z-index: -1;
+  }
+
+  .focus-ring:focus-within::before {
+    @apply opacity-100;
+  }
+
+  .focus-ring > * {
+    @apply relative z-10;
+  }
+
+  /* Moving Focus Dot */
+  .focus-dot {
+    @apply relative;
+  }
+
+  .focus-dot::after {
+    content: '';
+    @apply absolute w-2 h-2 bg-primary rounded-full opacity-0 transition-all duration-300;
+    box-shadow: 0 0 0 4px hsl(var(--primary) / 0.2);
+  }
+
+  .focus-dot:focus-within::after {
+    @apply opacity-100;
+    animation: move-dot 2s ease-in-out infinite;
+  }
+
+  /* Doctor Card Hover Effects */
+  .doctor-card {
+    @apply relative overflow-hidden rounded-xl transition-all duration-300 hover:scale-105;
+    box-shadow: var(--shadow-md);
+  }
+
+  .doctor-card:hover {
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    transform: translateY(-8px) scale(1.02);
+  }
+
+  .doctor-card::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300 pointer-events-none;
+    background: var(--gradient-primary);
+    z-index: 1;
+  }
+
+  .doctor-card:hover::before {
+    @apply opacity-10;
+  }
+
+  /* Profile Image Hover */
+  .profile-image {
+    @apply relative overflow-hidden rounded-full transition-all duration-300;
+  }
+
+  .profile-image::before {
+    content: '';
+    @apply absolute inset-0 rounded-full opacity-0 transition-opacity duration-300;
+    background: conic-gradient(hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)));
+    animation: rotate-border 2s linear infinite;
+    z-index: -1;
+    transform: scale(1.1);
+  }
+
+  .profile-image:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Button Hover Effects */
+  .btn-primary {
+    @apply relative overflow-hidden transition-all duration-300;
+    background: var(--gradient-primary);
+  }
+
+  .btn-primary::before {
+    content: '';
+    @apply absolute inset-0 bg-white opacity-0 transition-opacity duration-300;
+  }
+
+  .btn-primary:hover::before {
+    @apply opacity-20;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Pulse Animation for CTAs */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Search Bar Focus */
+  .search-focus {
+    @apply transition-all duration-300;
+  }
+
+  .search-focus:focus {
+    @apply scale-105;
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Theme Toggle Animation */
+  .theme-toggle {
+    @apply relative overflow-hidden transition-all duration-500;
+  }
+
+  .theme-toggle:hover {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes rotate-border {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes move-dot {
+  0%, 100% { 
+    top: 0;
+    left: 0;
+  }
+  25% { 
+    top: 0;
+    left: 100%;
+    transform: translateX(-100%);
+  }
+  50% { 
+    top: 100%;
+    left: 100%;
+    transform: translate(-100%, -100%);
+  }
+  75% { 
+    top: 100%;
+    left: 0;
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.6);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out;
+}
